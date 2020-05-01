@@ -1,0 +1,47 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    service.alpha.kubernetes.io/tolerate-unready-endpoints: "true"
+  name: docker-eicar
+  labels:
+    app: docker-eicar
+spec:
+  type: NodePort
+  ports:
+  - port: 5000
+    name: docker-eicar
+    targetPort: 5000
+    nodePort: 30200
+  selector:
+    app: docker-eicar
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: docker-eicar
+  name: docker-eicar
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: docker-eicar
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        app: docker-eicar
+    spec:
+      containers:
+      - name: docker-eicar
+        image: $K8S_REGISTRY/docker-eicar:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 5000
+      imagePullSecrets:
+      - name: $KUBERNETES_SECRET_NAME
