@@ -6,15 +6,6 @@ metadata:
   name: docker-eicar
   labels:
     app: docker-eicar
-spec:
-  type: NodePort
-  ports:
-  - port: 5000
-    name: docker-eicar
-    targetPort: 5000
-    nodePort: 30200
-  selector:
-    app: docker-eicar
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -41,7 +32,5 @@ spec:
       - name: docker-eicar
         image: $K8S_REGISTRY/docker-eicar:latest
         imagePullPolicy: Always
-        ports:
-        - containerPort: 5000
       imagePullSecrets:
       - name: $KUBERNETES_SECRET_NAME
