@@ -1,4 +1,4 @@
-FROM debian
+FROM ubuntu
 LABEL maintainer "Iñaki Zárate <izapps@pm.me>"
 
 RUN apt-get -y install wget
