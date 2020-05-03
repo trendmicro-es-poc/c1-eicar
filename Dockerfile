@@ -1,7 +1,7 @@
 FROM ubuntu
 LABEL maintainer "Iñaki Zárate <izapps@pm.me>"
 
-RUN apt-get -y install wget
+RUN apt-get install wget
 
 RUN echo "Descargando ficheros EICAR"
 RUN wget --no-check-certificate https://www.eicar.org/download/eicar.com.txt
