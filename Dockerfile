@@ -1,4 +1,4 @@
-FROM centos7
+FROM centos:7
 LABEL maintainer "Iñaki Zárate <izapps@pm.me>"
 
 RUN yum install -y wget
