@@ -1,7 +1,7 @@
-FROM ubuntu
+FROM centos7
 LABEL maintainer "Iñaki Zárate <izapps@pm.me>"
 
-RUN apt-get install wget
+RUN yum install -y wget
 
 RUN echo "Descargando ficheros EICAR"
 RUN wget --no-check-certificate https://www.eicar.org/download/eicar.com.txt
