@@ -1,7 +1,5 @@
-FROM centos:6
+FROM debian
 LABEL maintainer "Iñaki Zárate <izapps@pm.me>"
-
-RUN yum install -y wget
 
 RUN mkdir /eicar_files
 WORKDIR /eicar_files
