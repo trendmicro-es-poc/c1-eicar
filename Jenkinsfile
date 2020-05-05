@@ -68,7 +68,8 @@ node('jenkins-jenkins-slave') {
     stage('DS Scan for Recomendations') {
       withCredentials([string(credentialsId: 'deepsecurity-key', variable: 'DSKEY')]) {
         sh 'curl -X POST https://app.deepsecurity.trendmicro.com/api/scheduledtasks/133 -H "api-secret-key: ${DSKEY}" -H "api-version: v1" -H "Content-Type: application/json" -d "{ \\"runNow\\": \\"true\\" }" '
-      }     
+        }     
+      }
     }
   }
 }
