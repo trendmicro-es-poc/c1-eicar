@@ -65,7 +65,7 @@ node('jenkins-jenkins-slave') {
                            [credentialsId: "registry-auth", url: "${K8S_REGISTRY}"],
                          ])
       }
-    stage('DS Scan for Recomendations') {
+    stage('DS Scan for Recommendations') {
       withCredentials([string(credentialsId: 'deepsecurity-key', variable: 'DSKEY')]) {
         sh 'curl -X POST https://app.deepsecurity.trendmicro.com/api/scheduledtasks/133 -H "api-secret-key: ${DSKEY}" -H "api-version: v1" -H "Content-Type: application/json" -d "{ \\"runNow\\": \\"true\\" }" '
         }     
