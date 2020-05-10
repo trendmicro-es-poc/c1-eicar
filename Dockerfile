@@ -1,4 +1,4 @@
-FROM centos:7
+FROM ubuntu
 
 RUN mkdir /demo_files
 # COPY sample.jpg /demo_files
