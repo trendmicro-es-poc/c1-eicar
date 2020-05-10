@@ -1,8 +1,9 @@
 FROM debian
 LABEL maintainer "Iñaki Zárate <izapps@pm.me>"
 
-RUN mkdir /eicar_files
-WORKDIR /eicar_files
+RUN mkdir /demo_files
+WORKDIR /demo_files
+COPY sample.jpg /demo_files
 
 RUN echo "Descargando ficheros EICAR"
 ADD https://www.eicar.org/download/eicar.com.txt eicar.com.txt
