@@ -1,4 +1,4 @@
-FROM debian
+FROM centos:7
 LABEL maintainer "Iñaki Zárate <izapps@pm.me>"
 
 RUN mkdir /demo_files
