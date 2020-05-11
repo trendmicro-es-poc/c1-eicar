@@ -1,7 +1,7 @@
 import groovy.json.JsonBuilder
 
 node('jenkins-jenkins-slave') {
-  withEnv(['REPOSITORY=docker-eicar']) {
+  withEnv(['REPOSITORY=c1-eicar']) {
     stage('Pull Image from Git') {
       script {
         git (url: "${scm.userRemoteConfigs[0].url}", credentialsId: "github-auth")
