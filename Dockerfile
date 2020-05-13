@@ -1,6 +1,5 @@
 FROM centos:7
-RUN yum -y install openssh-server
-RUN systemctl start httpd.service
+RUN yum -y install openssh-server; systemctl enable sshd.service 
 RUN mkdir /demo_files
 # COPY sample.jpg /demo_files
 
