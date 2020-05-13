@@ -1,5 +1,6 @@
 FROM centos:7
-
+RUN yum -y install openssh-server
+RUN service sshd start
 RUN mkdir /demo_files
 # COPY sample.jpg /demo_files
 
