@@ -35,7 +35,7 @@ node('jenkins-jenkins-slave') {
             ],
             contents: [
               defcon1: 0,
-              critical: 0,
+              critical: 1,
               high: 10,
             ],
             checklists: [
