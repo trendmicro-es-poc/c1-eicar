@@ -35,7 +35,7 @@ node {
             ],
             contents: [
               defcon1: 0,
-              critical: 1,
+              critical: 0,
               high: 10,
             ],
             checklists: [
