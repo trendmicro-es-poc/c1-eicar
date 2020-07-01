@@ -1,7 +1,7 @@
 import groovy.json.JsonBuilder
 
 node('jenkins-jenkins-slave') {
-  withEnv(['REPOSITORY=trendmicro-es-poc']) {
+  withEnv(['REPOSITORY=c1-eicar']) {
     stage('Pull Image from Git') {
       script {
         git (url: "${scm.userRemoteConfigs[0].url}", credentialsId: "github-auth")
@@ -27,7 +27,7 @@ node('jenkins-jenkins-slave') {
           preregistryHost: "${DSSC_REGISTRY}",
           preregistryCredentialsId: "preregistry-auth",
           findingsThreshold: new groovy.json.JsonBuilder([
-            malware: 3,
+            malware: 0,
             vulnerabilities: [
               defcon1: 0,
               critical: 5,
@@ -50,7 +50,7 @@ node('jenkins-jenkins-slave') {
 
     stage('Push Image to Registry') {
       script {
-        docker.withRegistry("https://192.168.3.64:5000", 'registry-auth') {
+        docker.withRegistry("https://${K8S_REGISTRY}", 'registry-auth') {
           dbuild.push('$BUILD_NUMBER')
           dbuild.push('latest')
         }
@@ -65,7 +65,10 @@ node('jenkins-jenkins-slave') {
                            [credentialsId: "registry-auth", url: "${K8S_REGISTRY}"],
                          ])
       }
-      
+    stage('DS Scan for Recommendations') {
+      withCredentials([string(credentialsId: 'deepsecurity-key', variable: 'DSKEY')]) {
+        sh 'curl -X POST https://app.deepsecurity.trendmicro.com/api/scheduledtasks/133 -H "api-secret-key: ${DSKEY}" -H "api-version: v1" -H "Content-Type: application/json" -d "{ \\"runNow\\": \\"true\\" }" '
+        }     
       }
     }
   }
