@@ -56,20 +56,5 @@ node {
         }
       }
     }
-    stage('Deploy App to Kubernetes') {
-      script {
-        kubernetesDeploy(configs: "app.yml",
-                         kubeconfigId: "kubeconfig",
-                         enableConfigSubstitution: true,
-                         dockerCredentials: [
-                           [credentialsId: "registry-auth", url: "192.168.3.64:5000"],
-                         ])
-      }
-    stage('DS Scan for Recommendations') {
-      withCredentials([string(credentialsId: 'deepsecurity-key', variable: 'DSKEY')]) {
-        sh 'curl -X POST https://app.deepsecurity.trendmicro.com/api/scheduledtasks/133 -H "api-secret-key: ${DSKEY}" -H "api-version: v1" -H "Content-Type: application/json" -d "{ \\"runNow\\": \\"true\\" }" '
-        }     
-      }
-    }
   }
 }
