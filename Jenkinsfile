@@ -27,7 +27,7 @@ node {
           preregistryHost: "192.168.3.63:5000",
           preregistryCredentialsId: "preregistry-auth",
           findingsThreshold: new groovy.json.JsonBuilder([
-            malware: 1,
+            malware: 0,
             vulnerabilities: [
               defcon1: 0,
               critical: 5,
